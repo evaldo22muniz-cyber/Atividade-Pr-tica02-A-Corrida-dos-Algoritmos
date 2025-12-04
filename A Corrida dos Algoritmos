@@ -1,0 +1,100 @@
+#include <stdio.h>
+
+#define TAM 10
+
+void imprimeVetor(int v[])
+{
+    for (int i = 0; i < TAM; i++)
+        printf("%d ", v[i]);
+    printf("\n");
+}
+
+// ----------------- BUBBLE SORT -----------------
+void bubbleSort(int v[])
+{
+    int i, j, temp;
+    for (i = 0; i < TAM - 1; i++)
+    {
+        for (j = 0; j < TAM - 1 - i; j++)
+        {
+            if (v[j] > v[j + 1])
+            {
+                temp = v[j];
+                v[j] = v[j + 1];
+                v[j + 1] = temp;
+            }
+        }
+    }
+}
+
+// ---------------- SELECTION SORT ----------------
+void selectionSort(int v[])
+{
+    int i, j, min, temp;
+
+    for (i = 0; i < TAM - 1; i++)
+    {
+        min = i;
+        for (j = i + 1; j < TAM; j++)
+        {
+            if (v[j] < v[min])
+            {
+                min = j;
+            }
+        }
+        // troca
+        temp = v[i];
+        v[i] = v[min];
+        v[min] = temp;
+    }
+}
+
+// ---------------- INSERTION SORT ----------------
+void insertionSort(int v[])
+{
+    int i, j, chave;
+
+    for (i = 1; i < TAM; i++)
+    {
+        chave = v[i];
+        j = i - 1;
+
+        while (j >= 0 && v[j] > chave)
+        {
+            v[j + 1] = v[j];
+            j--;
+        }
+
+        v[j + 1] = chave;
+    }
+}
+
+int main()
+{
+
+    int vetorOriginal[TAM] = { 72, 54, 59, 30, 31, 78, 2, 77, 82, 72 };
+    int v[TAM];
+
+    printf("\nVetor original:\n");
+    imprimeVetor(vetorOriginal);
+
+    // BUBBLE SORT
+    for (int i = 0; i < TAM; i++) v[i] = vetorOriginal[i];
+    bubbleSort(v);
+    printf("\nBubble Sort:\n");
+    imprimeVetor(v);
+
+    // SELECTION SORT
+    for (int i = 0; i < TAM; i++) v[i] = vetorOriginal[i];
+    selectionSort(v);
+    printf("\nSelection Sort:\n");
+    imprimeVetor(v);
+
+    // INSERTION SORT
+    for (int i = 0; i < TAM; i++) v[i] = vetorOriginal[i];
+    insertionSort(v);
+    printf("\nInsertion Sort:\n");
+    imprimeVetor(v);
+
+    return 0;
+}
